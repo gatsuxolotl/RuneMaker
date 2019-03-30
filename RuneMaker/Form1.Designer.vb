@@ -25,7 +25,6 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
@@ -36,10 +35,8 @@ Partial Class Form1
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
-        '
-        'BackgroundWorker1
-        '
         '
         'Button1
         '
@@ -49,13 +46,6 @@ Partial Class Form1
         Me.Button1.TabIndex = 0
         Me.Button1.Text = "Runear"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'ProgressBar1
-        '
-        Me.ProgressBar1.Location = New System.Drawing.Point(12, 149)
-        Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(435, 23)
-        Me.ProgressBar1.TabIndex = 1
         '
         'TextBox1
         '
@@ -121,9 +111,6 @@ Partial Class Form1
         Me.Button3.Text = "Coordenada de la comida"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'Timer1
-        '
-        '
         'Button4
         '
         Me.Button4.Location = New System.Drawing.Point(195, 307)
@@ -133,11 +120,22 @@ Partial Class Form1
         Me.Button4.Text = "Stop"
         Me.Button4.UseVisualStyleBackColor = True
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(96, 152)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(121, 17)
+        Me.CheckBox1.TabIndex = 11
+        Me.CheckBox1.Text = "Stop on server save"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(513, 384)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -147,7 +145,6 @@ Partial Class Form1
         Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.Button1)
         Me.Name = "Form1"
         Me.Text = "Form1"
@@ -158,7 +155,6 @@ Partial Class Form1
 
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents Button1 As Button
-    Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents TextBox3 As TextBox
@@ -169,4 +165,5 @@ Partial Class Form1
     Friend WithEvents Button3 As Button
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Button4 As Button
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

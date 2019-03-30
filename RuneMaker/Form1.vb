@@ -6,21 +6,71 @@ Public Class Form1
     Public Const MOUSEEVENTF_LEFTDOWN = &H2
     Public Const MOUSEEVENTF_LEFTUP = &H4
     Public nextInt As Integer
+    Dim configPath = "C:\RuneMaker\config.txt"
+    Dim stopOnSS As Boolean
     'Private Shared WithEvents myTimer As New System.Windows.Forms.Timer()
 
+    Sub New()
+        Try
+            ' This call is required by the designer.
+            InitializeComponent()
+            stopOnSS = CheckBox1.Checked
+            Dim configDir = "C:\RuneMaker\"
+            If System.IO.Directory.Exists(configDir) Then
 
+                If System.IO.File.Exists(configPath) Then
+                    'The file exists
+                    Dim fileReader As String
+                    fileReader = My.Computer.FileSystem.ReadAllText(configPath)
+                    fillvalues(fileReader)
+                Else
+                    'the file doesn't exist
+                    System.IO.File.Create(configPath).Dispose()
+                End If
+            Else
+                System.IO.Directory.CreateDirectory(configDir)
+                System.IO.File.Create(configPath).Dispose()
+            End If
+
+            ' Add any initialization after the InitializeComponent() call.
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+
+    Private Sub fillvalues(fileReader As String)
+        Try
+
+            Dim configValues = fileReader.Split(New Char() {"*"c})
+            TextBox1.Text = configValues(0)
+            TextBox2.Text = configValues(1)
+            TextBox3.Text = configValues(2)
+            TextBox4.Text = configValues(3)
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            Dim bnext As Boolean = True
-            BackgroundWorker1.WorkerReportsProgress = True
+            'Dim bnext As Boolean = True
+            'BackgroundWorker1.WorkerReportsProgress = True
+            addConfigLine()
             Do
+                'If stopOnSS Then
+                '    If Date.Now < System.DateTime(3, 0) Then
+
+                '    End If
+                'End If
+
                 feed()
                 makeRune()
                 Dim rnd As Random = New Random()
                 nextInt = CInt(rnd.Next(840000, 870000))
                 'BackgroundWorker1.RunWorkerAsync()
-                Threading.Thread.Sleep(nextInt)
+                Threading.Thread.SpinWait(nextInt)
 
             Loop
         Catch ex As Exception
@@ -68,11 +118,21 @@ Public Class Form1
     'End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        addConfigLine()
         Windows.Forms.Cursor.Position = New Point(TextBox3.Text, TextBox4.Text)
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        addConfigLine()
         Windows.Forms.Cursor.Position = New Point(TextBox1.Text, TextBox2.Text)
+    End Sub
+
+    Sub addConfigLine()
+        System.IO.File.WriteAllText(configPath, String.Empty)
+        Dim file As System.IO.StreamWriter
+         file = My.Computer.FileSystem.OpenTextFileWriter(configPath, True)
+        file.WriteLine(TextBox1.Text & "*" & TextBox2.Text & "*" & TextBox3.Text & "*" & TextBox4.Text)
+        file.Close()
     End Sub
 
     'Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
