@@ -10,8 +10,6 @@ Public Class Form1
     Dim startDate As Date = Date.Now
     Dim errorLogFilePath = "C:\RuneMaker\errorLog.txt"
     Dim mainDir = "C:\RuneMaker\"
-    Dim numOfClickOnFood As Integer
-    Dim numOfClickOnspell As Integer
 
     Sub New()
         Try
@@ -61,12 +59,15 @@ Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            If ManaEnforceCheckBox1.Checked = True Then
-                ManaEnforce1()
-            End If
-            Button1.Enabled = False
-            TopMost = True
-            BackgroundWorker1.RunWorkerAsync()
+            Dim ManaEnforce1Trd As Thread
+            ManaEnforce1Trd = New Thread(AddressOf ManaEnforce1CountDown)
+            ManaEnforce1Trd.IsBackground = True
+            ManaEnforce1Trd.Start()
+
+            Dim RuneMakerTrd As Thread
+            RuneMakerTrd = New Thread(AddressOf RuneMakerMain)
+            RuneMakerTrd.IsBackground = True
+            RuneMakerTrd.Start()
         Catch ex As Exception
             Dim errormessage = "when i call the BackgroundWorker on the click event"
             writeErrorLog(errormessage & " : " & ex.Message)
@@ -76,10 +77,11 @@ Public Class Form1
 
     Private Sub feed()
         Try
-            For index As Integer = 1 To numOfClickOnFood
+            For index As Integer = 1 To CInt(NumberOfClicksOnFood.Text)
                 Windows.Forms.Cursor.Position = New Point(FoodCoordX.Text, FoodCoordY.Text)
                 Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
                 Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+                writeErrorLog("comer")
                 Thread.Sleep(1000)
             Next
         Catch ex As Exception
@@ -90,10 +92,11 @@ Public Class Form1
 
     Private Sub makeRune()
         Try
-            For index As Integer = 1 To numOfClickOnspell
+            For index As Integer = 1 To CInt(NumberOfClicksOnSpell.Text)
                 Windows.Forms.Cursor.Position = New Point(RuneCoordX.Text, RuneCoordY.Text)
                 Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
                 Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+                writeErrorLog("runa")
                 Thread.Sleep(2300)
             Next
         Catch ex As Exception
@@ -248,34 +251,34 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub ManaEnforce1()
+    Private Sub ManaEnforce1CountDown()
         Try
-            Dim ManaEnforce1Trd As Thread
-            ManaEnforce1Trd = New Thread(AddressOf ManaEnforce1CountDown)
-            ManaEnforce1Trd.IsBackground = True
-            ManaEnforce1Trd.Start(CInt(ManaEnforceTime1.Text * 60000))
-        Catch ex As Exception
-            Dim errormessage = "ManaEnforce1"
-            writeErrorLog(errormessage & " : " & ex.Message)
-        End Try
-    End Sub
-
-
-    Private Sub ManaEnforce1CountDown(sleepAmountTime As Integer)
-        Try
-            Do
-                Windows.Forms.Cursor.Position = New Point(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text)
-                Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-                Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
-                writeErrorLog("refuerzo de mana 1")
-                Thread.Sleep(sleepAmountTime)
-            Loop
+            If ManaEnforceCheckBox1.Checked = True Then
+                Dim sleepAmountTime = CInt(ManaEnforceTime1.Text * 60000)
+                Do
+                    Windows.Forms.Cursor.Position = New Point(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text)
+                    Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+                    Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+                    writeErrorLog("refuerzo de mana 1")
+                    Thread.Sleep(sleepAmountTime)
+                Loop
+            End If
         Catch ex As Exception
             Dim errormessage = "ManaEnforce1CountDown"
             writeErrorLog(errormessage & " : " & ex.Message)
         End Try
-
-
-        Thread.Sleep(sleepAmountTime)
     End Sub
+
+    Private Sub RuneMakerMain()
+        Try
+            Button1.Enabled = False
+            TopMost = True
+            BackgroundWorker1.RunWorkerAsync()
+        Catch ex As Exception
+            Dim errormessage = "RuneMakerMain"
+            writeErrorLog(errormessage & " : " & ex.Message)
+        End Try
+
+    End Sub
+
 End Class
