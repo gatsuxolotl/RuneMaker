@@ -59,6 +59,8 @@ Public Class Form1
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
+            Button1.Enabled = False
+
             Dim ManaEnforce1Trd As Thread
             ManaEnforce1Trd = New Thread(AddressOf ManaEnforce1CountDown)
             ManaEnforce1Trd.IsBackground = True
@@ -68,6 +70,14 @@ Public Class Form1
             RuneMakerTrd = New Thread(AddressOf RuneMakerMain)
             RuneMakerTrd.IsBackground = True
             RuneMakerTrd.Start()
+
+
+            'Dim ManaEnforce1Trd As New Thread(New ThreadStart(Sub() ManaEnforce1CountDown()))
+            'ManaEnforce1Trd.Start()
+
+            'Dim RuneMakerTrd As New Thread(New ThreadStart(Sub() RuneMakerMain()))
+            'RuneMakerTrd.Start()
+
         Catch ex As Exception
             Dim errormessage = "when i call the BackgroundWorker on the click event"
             writeErrorLog(errormessage & " : " & ex.Message)
@@ -251,28 +261,51 @@ Public Class Form1
         End Try
     End Sub
 
+    'Private Delegate Sub ManaEnforce1UpdateDelegate()
     Private Sub ManaEnforce1CountDown()
         Try
+            'If InvokeRequired Then
+            '    Invoke(New ManaEnforce1UpdateDelegate(AddressOf ManaEnforce1CountDown))
+            'Else
+            '    If ManaEnforceCheckBox1.Checked = True Then
+            '        Dim sleepAmountTime = CInt(ManaEnforceTime1.Text * 60000)
+            '        Do
+            '            Windows.Forms.Cursor.Position = New Point(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text)
+            '            Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+            '            Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+            '            Thread.Sleep(sleepAmountTime)
+            '        Loop
+            '    End If
+            'End If
+
+
             If ManaEnforceCheckBox1.Checked = True Then
                 Dim sleepAmountTime = CInt(ManaEnforceTime1.Text * 60000)
                 Do
                     Windows.Forms.Cursor.Position = New Point(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text)
                     Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
                     Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
-                    writeErrorLog("refuerzo de mana 1")
                     Thread.Sleep(sleepAmountTime)
                 Loop
             End If
+
         Catch ex As Exception
             Dim errormessage = "ManaEnforce1CountDown"
             writeErrorLog(errormessage & " : " & ex.Message)
         End Try
     End Sub
 
+    'Private Delegate Sub RuneMakerMainUpdateDelegate()
     Private Sub RuneMakerMain()
         Try
-            Button1.Enabled = False
-            TopMost = True
+            'If InvokeRequired Then
+            '    Invoke(New RuneMakerMainUpdateDelegate(AddressOf RuneMakerMain))
+            'Else
+            '    Button1.Enabled = False
+            '    'TopMost = True
+            '    BackgroundWorker1.RunWorkerAsync()
+            'End If
+            'TopMost = True
             BackgroundWorker1.RunWorkerAsync()
         Catch ex As Exception
             Dim errormessage = "RuneMakerMain"
