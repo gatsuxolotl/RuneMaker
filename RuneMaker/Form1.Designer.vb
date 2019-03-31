@@ -36,11 +36,12 @@ Partial Class Form1
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button4 = New System.Windows.Forms.Button()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.SuspendLayout()
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(152, 251)
+        Me.Button1.Location = New System.Drawing.Point(152, 233)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(160, 23)
         Me.Button1.TabIndex = 0
@@ -95,7 +96,7 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(247, 197)
+        Me.Button2.Location = New System.Drawing.Point(247, 179)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(160, 23)
         Me.Button2.TabIndex = 8
@@ -104,7 +105,7 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(57, 197)
+        Me.Button3.Location = New System.Drawing.Point(57, 179)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(160, 23)
         Me.Button3.TabIndex = 9
@@ -113,7 +114,7 @@ Partial Class Form1
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(195, 307)
+        Me.Button4.Location = New System.Drawing.Point(195, 289)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 23)
         Me.Button4.TabIndex = 10
@@ -123,18 +124,29 @@ Partial Class Form1
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(96, 152)
+        Me.CheckBox1.Location = New System.Drawing.Point(96, 130)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(121, 17)
+        Me.CheckBox1.Size = New System.Drawing.Size(141, 17)
         Me.CheckBox1.TabIndex = 11
-        Me.CheckBox1.Text = "Stop on server save"
+        Me.CheckBox1.Text = "Detener despues del SS"
         Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(96, 153)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(137, 17)
+        Me.CheckBox2.TabIndex = 12
+        Me.CheckBox2.Text = "Apagar despues del SS"
+        Me.CheckBox2.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(513, 384)
+        Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
@@ -166,4 +178,5 @@ Partial Class Form1
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Button4 As Button
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents CheckBox2 As CheckBox
 End Class
