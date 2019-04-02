@@ -46,7 +46,7 @@ Partial Class Form1
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.ManaEnforceTime1 = New System.Windows.Forms.TextBox()
-        Me.ManaReforceTime2 = New System.Windows.Forms.TextBox()
+        Me.ManaEnforceTime2 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -244,12 +244,12 @@ Partial Class Form1
         Me.ManaEnforceTime1.Size = New System.Drawing.Size(100, 20)
         Me.ManaEnforceTime1.TabIndex = 21
         '
-        'ManaReforceTime2
+        'ManaEnforceTime2
         '
-        Me.ManaReforceTime2.Location = New System.Drawing.Point(343, 248)
-        Me.ManaReforceTime2.Name = "ManaReforceTime2"
-        Me.ManaReforceTime2.Size = New System.Drawing.Size(100, 20)
-        Me.ManaReforceTime2.TabIndex = 22
+        Me.ManaEnforceTime2.Location = New System.Drawing.Point(343, 248)
+        Me.ManaEnforceTime2.Name = "ManaEnforceTime2"
+        Me.ManaEnforceTime2.Size = New System.Drawing.Size(100, 20)
+        Me.ManaEnforceTime2.TabIndex = 22
         '
         'Label7
         '
@@ -440,7 +440,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.ManaReforceTime2)
+        Me.Controls.Add(Me.ManaEnforceTime2)
         Me.Controls.Add(Me.ManaEnforceTime1)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
@@ -492,7 +492,7 @@ Partial Class Form1
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents ManaEnforceTime1 As TextBox
-    Friend WithEvents ManaReforceTime2 As TextBox
+    Friend WithEvents ManaEnforceTime2 As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label

@@ -10,10 +10,13 @@ Public Class Form1
     Dim startDate As Date = Date.Now
     Dim errorLogFilePath = "C:\RuneMaker\errorLog.txt"
     Dim mainDir = "C:\RuneMaker\"
-
+    Dim WithEvents objManaEnforce1 As ManaEnforce1
+    Dim WithEvents objManaEnforce2 As ManaEnforce2
     Sub New()
         Try
             InitializeComponent()
+            objManaEnforce1 = New ManaEnforce1
+            objManaEnforce2 = New ManaEnforce2
             Me.BackgroundWorker1.WorkerReportsProgress = True
             If System.IO.Directory.Exists(mainDir) Then
 
@@ -50,7 +53,9 @@ Public Class Form1
             ManaEnforceTime1.Text = configValues(7)
             EnforceMana1CoordX.Text = configValues(8)
             EnforceMana1CoordY.Text = configValues(9)
-
+            ManaEnforceTime2.Text = configValues(10)
+            EnforceMana2CoordX.Text = configValues(11)
+            EnforceMana2CoordY.Text = configValues(12)
         Catch ex As Exception
             Dim errormessage = "Filling the text box"
             writeErrorLog(errormessage & " : " & ex.Message)
@@ -60,23 +65,23 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             Button1.Enabled = False
+            TopMost = True
+            If ManaEnforceCheckBox1.Checked = True Then
+                Dim ManaEnforce1Trd As Thread
+                ManaEnforce1Trd = New Thread(AddressOf ManaEnforce1CountDown)
+                ManaEnforce1Trd.IsBackground = True
+                ManaEnforce1Trd.Start()
+            End If
 
-            Dim ManaEnforce1Trd As Thread
-            ManaEnforce1Trd = New Thread(AddressOf ManaEnforce1CountDown)
-            ManaEnforce1Trd.IsBackground = True
-            ManaEnforce1Trd.Start()
+            If ManaEnforceCheckBox2.Checked = True Then
+                Dim ManaEnforce2Trd As Thread
+                ManaEnforce2Trd = New Thread(AddressOf ManaEnforce2CountDown)
+                ManaEnforce2Trd.IsBackground = True
+                ManaEnforce2Trd.Start()
+            End If
 
-            Dim RuneMakerTrd As Thread
-            RuneMakerTrd = New Thread(AddressOf RuneMakerMain)
-            RuneMakerTrd.IsBackground = True
+            Dim RuneMakerTrd As New Thread(New ThreadStart(Sub() RuneMakerMain()))
             RuneMakerTrd.Start()
-
-
-            'Dim ManaEnforce1Trd As New Thread(New ThreadStart(Sub() ManaEnforce1CountDown()))
-            'ManaEnforce1Trd.Start()
-
-            'Dim RuneMakerTrd As New Thread(New ThreadStart(Sub() RuneMakerMain()))
-            'RuneMakerTrd.Start()
 
         Catch ex As Exception
             Dim errormessage = "when i call the BackgroundWorker on the click event"
@@ -88,11 +93,9 @@ Public Class Form1
     Private Sub feed()
         Try
             For index As Integer = 1 To CInt(NumberOfClicksOnFood.Text)
-                Windows.Forms.Cursor.Position = New Point(FoodCoordX.Text, FoodCoordY.Text)
-                Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-                Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
-                writeErrorLog("comer")
-                Thread.Sleep(1000)
+                MasterClick(FoodCoordX.Text, FoodCoordY.Text)
+                Console.WriteLine(Date.Now & "food")
+                'Thread.Sleep(1000)
             Next
         Catch ex As Exception
             Dim errormessage = "while feed the char"
@@ -103,11 +106,9 @@ Public Class Form1
     Private Sub makeRune()
         Try
             For index As Integer = 1 To CInt(NumberOfClicksOnSpell.Text)
-                Windows.Forms.Cursor.Position = New Point(RuneCoordX.Text, RuneCoordY.Text)
-                Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-                Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
-                writeErrorLog("runa")
-                Thread.Sleep(2300)
+                MasterClick(RuneCoordX.Text, RuneCoordY.Text)
+                Console.WriteLine(Date.Now & "spell")
+                Thread.Sleep(1300)
             Next
         Catch ex As Exception
             Dim errormessage = "making the rune"
@@ -140,7 +141,7 @@ Public Class Form1
     Sub saveConfig()
         Try
             Dim objWriter As New System.IO.StreamWriter(configFilePath, False)
-            objWriter.Write(FoodCoordX.Text & "*" & FoodCoordY.Text & "*" & RuneCoordX.Text & "*" & RuneCoordY.Text & "*" & RunEveryXMin.Text & "*" & NumberOfClicksOnFood.Text & "*" & NumberOfClicksOnSpell.Text & "*" & ManaEnforceTime1.Text & "*" & EnforceMana1CoordX.Text & "*" & EnforceMana1CoordY.Text)
+            objWriter.Write(FoodCoordX.Text & "*" & FoodCoordY.Text & "*" & RuneCoordX.Text & "*" & RuneCoordY.Text & "*" & RunEveryXMin.Text & "*" & NumberOfClicksOnFood.Text & "*" & NumberOfClicksOnSpell.Text & "*" & ManaEnforceTime1.Text & "*" & EnforceMana1CoordX.Text & "*" & EnforceMana1CoordY.Text & "*" & ManaEnforceTime2.Text & "*" & EnforceMana2CoordX.Text & "*" & EnforceMana2CoordY.Text)
             objWriter.Close()
 
         Catch ex As Exception
@@ -256,62 +257,103 @@ Public Class Form1
             saveConfig()
             Windows.Forms.Cursor.Position = New Point(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text)
         Catch ex As Exception
-            Dim errormessage = "checkin the food cursor position"
+            Dim errormessage = "ManaEnforceCoordButton1"
             writeErrorLog(errormessage & " : " & ex.Message)
         End Try
     End Sub
 
-    'Private Delegate Sub ManaEnforce1UpdateDelegate()
+    Private Sub ManaEnforceCoordButton2_Click(sender As Object, e As EventArgs) Handles ManaEnforceCoordButton2.Click
+        Try
+            saveConfig()
+            Windows.Forms.Cursor.Position = New Point(EnforceMana2CoordX.Text, EnforceMana2CoordY.Text)
+        Catch ex As Exception
+            Dim errormessage = "ManaEnforceCoordButton2"
+            writeErrorLog(errormessage & " : " & ex.Message)
+        End Try
+    End Sub
+
     Private Sub ManaEnforce1CountDown()
         Try
-            'If InvokeRequired Then
-            '    Invoke(New ManaEnforce1UpdateDelegate(AddressOf ManaEnforce1CountDown))
-            'Else
-            '    If ManaEnforceCheckBox1.Checked = True Then
-            '        Dim sleepAmountTime = CInt(ManaEnforceTime1.Text * 60000)
-            '        Do
-            '            Windows.Forms.Cursor.Position = New Point(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text)
-            '            Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-            '            Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
-            '            Thread.Sleep(sleepAmountTime)
-            '        Loop
-            '    End If
-            'End If
-
-
-            If ManaEnforceCheckBox1.Checked = True Then
-                Dim sleepAmountTime = CInt(ManaEnforceTime1.Text * 60000)
-                Do
-                    Windows.Forms.Cursor.Position = New Point(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text)
-                    Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-                    Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
-                    Thread.Sleep(sleepAmountTime)
-                Loop
-            End If
-
+            Dim sleepAmountTime = CInt(ManaEnforceTime1.Text * 60000)
+            Do
+                objManaEnforce1.LaunchManaEnforce1()
+                Thread.Sleep(sleepAmountTime)
+            Loop
         Catch ex As Exception
             Dim errormessage = "ManaEnforce1CountDown"
             writeErrorLog(errormessage & " : " & ex.Message)
         End Try
     End Sub
 
-    'Private Delegate Sub RuneMakerMainUpdateDelegate()
+    Private Sub ManaEnforce2CountDown()
+        Try
+            Dim sleepAmountTime = CInt(ManaEnforceTime2.Text * 60000)
+            Do
+                objManaEnforce2.LaunchManaEnforce2()
+                Thread.Sleep(sleepAmountTime)
+            Loop
+        Catch ex As Exception
+            Dim errormessage = "ManaEnforce1CountDown"
+            writeErrorLog(errormessage & " : " & ex.Message)
+        End Try
+    End Sub
+
+    Private Delegate Sub RuneMakerMainUpdateDelegate()
     Private Sub RuneMakerMain()
         Try
-            'If InvokeRequired Then
-            '    Invoke(New RuneMakerMainUpdateDelegate(AddressOf RuneMakerMain))
-            'Else
-            '    Button1.Enabled = False
-            '    'TopMost = True
-            '    BackgroundWorker1.RunWorkerAsync()
-            'End If
-            'TopMost = True
-            BackgroundWorker1.RunWorkerAsync()
+            If InvokeRequired Then
+                Invoke(New RuneMakerMainUpdateDelegate(AddressOf RuneMakerMain))
+            Else
+                Button1.Enabled = False
+                BackgroundWorker1.RunWorkerAsync()
+            End If
+
         Catch ex As Exception
             Dim errormessage = "RuneMakerMain"
             writeErrorLog(errormessage & " : " & ex.Message)
         End Try
-
     End Sub
 
+    Private Delegate Sub MasterClickDlegeate(ByVal CoordX As Double, ByVal Coordy As Double)
+    Private Sub MasterClick(ByVal CoordX As Double, ByVal Coordy As Double)
+        Try
+            Threading.Thread.Sleep(100)
+            If InvokeRequired Then
+                Invoke(New MasterClickDlegeate(AddressOf MasterClick), CoordX, Coordy)
+            End If
+            Windows.Forms.Cursor.Position = New Point(CoordX, Coordy)
+            Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+            Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+        Catch ex As Exception
+            Dim errormessage = "MasterClick"
+            writeErrorLog(errormessage & " : " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub manaEnforce1_ManaEnforce1Event() Handles objManaEnforce1.ManaEnforce1Event
+        MasterClick(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text)
+        Console.WriteLine(Date.Now & "mana1")
+    End Sub
+
+    Private Sub manaEnforce2_ManaEnforce2Event() Handles objManaEnforce2.ManaEnforce2Event
+        MasterClick(EnforceMana2CoordX.Text, EnforceMana2CoordY.Text)
+        Console.WriteLine(Date.Now & "mana2")
+    End Sub
 End Class
+
+Public Class ManaEnforce1
+    Public Event ManaEnforce1Event()
+
+    Public Sub LaunchManaEnforce1()
+        RaiseEvent ManaEnforce1Event()
+    End Sub
+End Class
+
+Public Class ManaEnforce2
+    Public Event ManaEnforce2Event()
+
+    Public Sub LaunchManaEnforce2()
+        RaiseEvent ManaEnforce2Event()
+    End Sub
+End Class
+
