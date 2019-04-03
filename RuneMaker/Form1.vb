@@ -12,6 +12,7 @@ Public Class Form1
     Dim mainDir = "C:\RuneMaker\"
     Dim WithEvents objManaEnforce1 As ManaEnforce1
     Dim WithEvents objManaEnforce2 As ManaEnforce2
+    Private objLock As New Object
     Sub New()
         Try
             InitializeComponent()
@@ -65,7 +66,7 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             Button1.Enabled = False
-            TopMost = True
+            'TopMost = True
             If ManaEnforceCheckBox1.Checked = True Then
                 Dim ManaEnforce1Trd As Thread
                 ManaEnforce1Trd = New Thread(AddressOf ManaEnforce1CountDown)
@@ -93,9 +94,9 @@ Public Class Form1
     Private Sub feed()
         Try
             For index As Integer = 1 To CInt(NumberOfClicksOnFood.Text)
-                MasterClick(FoodCoordX.Text, FoodCoordY.Text)
-                Console.WriteLine(Date.Now & "food")
-                'Thread.Sleep(1000)
+                MasterClick(FoodCoordX.Text, FoodCoordY.Text, 500, "food")
+                'Console.WriteLine("food")
+                Thread.Sleep(500)
             Next
         Catch ex As Exception
             Dim errormessage = "while feed the char"
@@ -106,9 +107,9 @@ Public Class Form1
     Private Sub makeRune()
         Try
             For index As Integer = 1 To CInt(NumberOfClicksOnSpell.Text)
-                MasterClick(RuneCoordX.Text, RuneCoordY.Text)
-                Console.WriteLine(Date.Now & "spell")
-                Thread.Sleep(1300)
+                MasterClick(RuneCoordX.Text, RuneCoordY.Text, 500, "spell")
+                'Console.WriteLine("spell")
+                Thread.Sleep(1600)
             Next
         Catch ex As Exception
             Dim errormessage = "making the rune"
@@ -314,16 +315,16 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Delegate Sub MasterClickDlegeate(ByVal CoordX As Double, ByVal Coordy As Double)
-    Private Sub MasterClick(ByVal CoordX As Double, ByVal Coordy As Double)
+
+    Private Sub MasterClick(ByVal CoordX As Double, ByVal Coordy As Double, ccTime As Double, source As String)
         Try
-            Threading.Thread.Sleep(100)
-            If InvokeRequired Then
-                Invoke(New MasterClickDlegeate(AddressOf MasterClick), CoordX, Coordy)
-            End If
-            Windows.Forms.Cursor.Position = New Point(CoordX, Coordy)
-            Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-            Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+            SyncLock objLock
+                Threading.Thread.Sleep(ccTime)
+                Console.WriteLine(Date.Now & " : " & source)
+                Windows.Forms.Cursor.Position = New Point(CoordX, Coordy)
+                Call apimouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+                Call apimouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+            End SyncLock
         Catch ex As Exception
             Dim errormessage = "MasterClick"
             writeErrorLog(errormessage & " : " & ex.Message)
@@ -331,13 +332,13 @@ Public Class Form1
     End Sub
 
     Private Sub manaEnforce1_ManaEnforce1Event() Handles objManaEnforce1.ManaEnforce1Event
-        MasterClick(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text)
-        Console.WriteLine(Date.Now & "mana1")
+        MasterClick(EnforceMana1CoordX.Text, EnforceMana1CoordY.Text, 1000, "mana1")
+        'Console.WriteLine("mana1")
     End Sub
 
     Private Sub manaEnforce2_ManaEnforce2Event() Handles objManaEnforce2.ManaEnforce2Event
-        MasterClick(EnforceMana2CoordX.Text, EnforceMana2CoordY.Text)
-        Console.WriteLine(Date.Now & "mana2")
+        MasterClick(EnforceMana2CoordX.Text, EnforceMana2CoordY.Text, 1000, "mana2")
+        'Console.WriteLine("mana2")
     End Sub
 End Class
 
