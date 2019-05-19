@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.FoodCoordX = New System.Windows.Forms.TextBox()
@@ -66,6 +67,10 @@ Partial Class Form1
         Me.Label17 = New System.Windows.Forms.Label()
         Me.EnforceMana2CoordY = New System.Windows.Forms.TextBox()
         Me.EnforceMana2CoordX = New System.Windows.Forms.TextBox()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'BackgroundWorker1
@@ -73,7 +78,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(533, 125)
+        Me.Button1.Location = New System.Drawing.Point(532, 140)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(160, 23)
         Me.Button1.TabIndex = 0
@@ -82,28 +87,28 @@ Partial Class Form1
         '
         'FoodCoordX
         '
-        Me.FoodCoordX.Location = New System.Drawing.Point(41, 76)
+        Me.FoodCoordX.Location = New System.Drawing.Point(40, 91)
         Me.FoodCoordX.Name = "FoodCoordX"
         Me.FoodCoordX.Size = New System.Drawing.Size(100, 20)
         Me.FoodCoordX.TabIndex = 2
         '
         'FoodCoordY
         '
-        Me.FoodCoordY.Location = New System.Drawing.Point(41, 102)
+        Me.FoodCoordY.Location = New System.Drawing.Point(40, 117)
         Me.FoodCoordY.Name = "FoodCoordY"
         Me.FoodCoordY.Size = New System.Drawing.Size(100, 20)
         Me.FoodCoordY.TabIndex = 3
         '
         'RuneCoordX
         '
-        Me.RuneCoordX.Location = New System.Drawing.Point(193, 76)
+        Me.RuneCoordX.Location = New System.Drawing.Point(192, 91)
         Me.RuneCoordX.Name = "RuneCoordX"
         Me.RuneCoordX.Size = New System.Drawing.Size(100, 20)
         Me.RuneCoordX.TabIndex = 4
         '
         'RuneCoordY
         '
-        Me.RuneCoordY.Location = New System.Drawing.Point(193, 102)
+        Me.RuneCoordY.Location = New System.Drawing.Point(192, 117)
         Me.RuneCoordY.Name = "RuneCoordY"
         Me.RuneCoordY.Size = New System.Drawing.Size(100, 20)
         Me.RuneCoordY.TabIndex = 5
@@ -111,7 +116,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(38, 60)
+        Me.Label1.Location = New System.Drawing.Point(37, 75)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(128, 13)
         Me.Label1.TabIndex = 6
@@ -120,7 +125,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(193, 60)
+        Me.Label2.Location = New System.Drawing.Point(192, 75)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(115, 13)
         Me.Label2.TabIndex = 7
@@ -128,7 +133,7 @@ Partial Class Form1
         '
         'SpellCoordButton
         '
-        Me.SpellCoordButton.Location = New System.Drawing.Point(533, 60)
+        Me.SpellCoordButton.Location = New System.Drawing.Point(532, 75)
         Me.SpellCoordButton.Name = "SpellCoordButton"
         Me.SpellCoordButton.Size = New System.Drawing.Size(160, 23)
         Me.SpellCoordButton.TabIndex = 8
@@ -137,7 +142,7 @@ Partial Class Form1
         '
         'FoodCoordButton
         '
-        Me.FoodCoordButton.Location = New System.Drawing.Point(343, 60)
+        Me.FoodCoordButton.Location = New System.Drawing.Point(342, 75)
         Me.FoodCoordButton.Name = "FoodCoordButton"
         Me.FoodCoordButton.Size = New System.Drawing.Size(160, 23)
         Me.FoodCoordButton.TabIndex = 9
@@ -146,7 +151,7 @@ Partial Class Form1
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(576, 181)
+        Me.Button4.Location = New System.Drawing.Point(575, 196)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 23)
         Me.Button4.TabIndex = 10
@@ -156,7 +161,7 @@ Partial Class Form1
         'StopAfterSS
         '
         Me.StopAfterSS.AutoSize = True
-        Me.StopAfterSS.Location = New System.Drawing.Point(193, 129)
+        Me.StopAfterSS.Location = New System.Drawing.Point(192, 144)
         Me.StopAfterSS.Name = "StopAfterSS"
         Me.StopAfterSS.Size = New System.Drawing.Size(141, 17)
         Me.StopAfterSS.TabIndex = 11
@@ -166,7 +171,7 @@ Partial Class Form1
         'ShutDawnAfterSS
         '
         Me.ShutDawnAfterSS.AutoSize = True
-        Me.ShutDawnAfterSS.Location = New System.Drawing.Point(193, 152)
+        Me.ShutDawnAfterSS.Location = New System.Drawing.Point(192, 167)
         Me.ShutDawnAfterSS.Name = "ShutDawnAfterSS"
         Me.ShutDawnAfterSS.Size = New System.Drawing.Size(137, 17)
         Me.ShutDawnAfterSS.TabIndex = 12
@@ -175,7 +180,7 @@ Partial Class Form1
         '
         'ProgressBar1
         '
-        Me.ProgressBar1.Location = New System.Drawing.Point(12, 12)
+        Me.ProgressBar1.Location = New System.Drawing.Point(11, 27)
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.Size = New System.Drawing.Size(699, 23)
         Me.ProgressBar1.TabIndex = 13
@@ -183,7 +188,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(38, 129)
+        Me.Label3.Location = New System.Drawing.Point(37, 144)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(111, 13)
         Me.Label3.TabIndex = 14
@@ -191,7 +196,7 @@ Partial Class Form1
         '
         'RunEveryXMin
         '
-        Me.RunEveryXMin.Location = New System.Drawing.Point(41, 145)
+        Me.RunEveryXMin.Location = New System.Drawing.Point(40, 160)
         Me.RunEveryXMin.Name = "RunEveryXMin"
         Me.RunEveryXMin.Size = New System.Drawing.Size(100, 20)
         Me.RunEveryXMin.TabIndex = 15
@@ -199,7 +204,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(38, 168)
+        Me.Label4.Location = New System.Drawing.Point(37, 183)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(141, 13)
         Me.Label4.TabIndex = 16
@@ -207,14 +212,14 @@ Partial Class Form1
         '
         'NumberOfClicksOnFood
         '
-        Me.NumberOfClicksOnFood.Location = New System.Drawing.Point(41, 186)
+        Me.NumberOfClicksOnFood.Location = New System.Drawing.Point(40, 201)
         Me.NumberOfClicksOnFood.Name = "NumberOfClicksOnFood"
         Me.NumberOfClicksOnFood.Size = New System.Drawing.Size(100, 20)
         Me.NumberOfClicksOnFood.TabIndex = 17
         '
         'NumberOfClicksOnSpell
         '
-        Me.NumberOfClicksOnSpell.Location = New System.Drawing.Point(196, 186)
+        Me.NumberOfClicksOnSpell.Location = New System.Drawing.Point(195, 201)
         Me.NumberOfClicksOnSpell.Name = "NumberOfClicksOnSpell"
         Me.NumberOfClicksOnSpell.Size = New System.Drawing.Size(100, 20)
         Me.NumberOfClicksOnSpell.TabIndex = 18
@@ -222,7 +227,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(193, 168)
+        Me.Label5.Location = New System.Drawing.Point(192, 183)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(128, 13)
         Me.Label5.TabIndex = 19
@@ -231,7 +236,7 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(38, 232)
+        Me.Label6.Location = New System.Drawing.Point(37, 247)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(265, 13)
         Me.Label6.TabIndex = 20
@@ -239,14 +244,14 @@ Partial Class Form1
         '
         'ManaEnforceTime1
         '
-        Me.ManaEnforceTime1.Location = New System.Drawing.Point(44, 248)
+        Me.ManaEnforceTime1.Location = New System.Drawing.Point(43, 263)
         Me.ManaEnforceTime1.Name = "ManaEnforceTime1"
         Me.ManaEnforceTime1.Size = New System.Drawing.Size(100, 20)
         Me.ManaEnforceTime1.TabIndex = 21
         '
         'ManaEnforceTime2
         '
-        Me.ManaEnforceTime2.Location = New System.Drawing.Point(343, 248)
+        Me.ManaEnforceTime2.Location = New System.Drawing.Point(342, 263)
         Me.ManaEnforceTime2.Name = "ManaEnforceTime2"
         Me.ManaEnforceTime2.Size = New System.Drawing.Size(100, 20)
         Me.ManaEnforceTime2.TabIndex = 22
@@ -254,7 +259,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(340, 232)
+        Me.Label7.Location = New System.Drawing.Point(339, 247)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(265, 13)
         Me.Label7.TabIndex = 23
@@ -263,7 +268,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(21, 79)
+        Me.Label8.Location = New System.Drawing.Point(20, 94)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(14, 13)
         Me.Label8.TabIndex = 24
@@ -272,7 +277,7 @@ Partial Class Form1
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(21, 105)
+        Me.Label9.Location = New System.Drawing.Point(20, 120)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(14, 13)
         Me.Label9.TabIndex = 25
@@ -281,7 +286,7 @@ Partial Class Form1
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(173, 105)
+        Me.Label10.Location = New System.Drawing.Point(172, 120)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(14, 13)
         Me.Label10.TabIndex = 27
@@ -290,7 +295,7 @@ Partial Class Form1
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(173, 79)
+        Me.Label11.Location = New System.Drawing.Point(172, 94)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(14, 13)
         Me.Label11.TabIndex = 26
@@ -298,7 +303,7 @@ Partial Class Form1
         '
         'ManaEnforceCoordButton1
         '
-        Me.ManaEnforceCoordButton1.Location = New System.Drawing.Point(343, 92)
+        Me.ManaEnforceCoordButton1.Location = New System.Drawing.Point(342, 107)
         Me.ManaEnforceCoordButton1.Name = "ManaEnforceCoordButton1"
         Me.ManaEnforceCoordButton1.Size = New System.Drawing.Size(160, 23)
         Me.ManaEnforceCoordButton1.TabIndex = 28
@@ -307,7 +312,7 @@ Partial Class Form1
         '
         'ManaEnforceCoordButton2
         '
-        Me.ManaEnforceCoordButton2.Location = New System.Drawing.Point(533, 92)
+        Me.ManaEnforceCoordButton2.Location = New System.Drawing.Point(532, 107)
         Me.ManaEnforceCoordButton2.Name = "ManaEnforceCoordButton2"
         Me.ManaEnforceCoordButton2.Size = New System.Drawing.Size(160, 23)
         Me.ManaEnforceCoordButton2.TabIndex = 29
@@ -317,7 +322,7 @@ Partial Class Form1
         'ManaEnforceCheckBox1
         '
         Me.ManaEnforceCheckBox1.AutoSize = True
-        Me.ManaEnforceCheckBox1.Location = New System.Drawing.Point(40, 212)
+        Me.ManaEnforceCheckBox1.Location = New System.Drawing.Point(39, 227)
         Me.ManaEnforceCheckBox1.Name = "ManaEnforceCheckBox1"
         Me.ManaEnforceCheckBox1.Size = New System.Drawing.Size(139, 17)
         Me.ManaEnforceCheckBox1.TabIndex = 30
@@ -327,7 +332,7 @@ Partial Class Form1
         'ManaEnforceCheckBox2
         '
         Me.ManaEnforceCheckBox2.AutoSize = True
-        Me.ManaEnforceCheckBox2.Location = New System.Drawing.Point(343, 212)
+        Me.ManaEnforceCheckBox2.Location = New System.Drawing.Point(342, 227)
         Me.ManaEnforceCheckBox2.Name = "ManaEnforceCheckBox2"
         Me.ManaEnforceCheckBox2.Size = New System.Drawing.Size(139, 17)
         Me.ManaEnforceCheckBox2.TabIndex = 31
@@ -337,7 +342,7 @@ Partial Class Form1
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(24, 316)
+        Me.Label12.Location = New System.Drawing.Point(23, 331)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(14, 13)
         Me.Label12.TabIndex = 36
@@ -346,7 +351,7 @@ Partial Class Form1
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(24, 290)
+        Me.Label13.Location = New System.Drawing.Point(23, 305)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(14, 13)
         Me.Label13.TabIndex = 35
@@ -355,7 +360,7 @@ Partial Class Form1
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(38, 270)
+        Me.Label14.Location = New System.Drawing.Point(37, 285)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(176, 13)
         Me.Label14.TabIndex = 34
@@ -363,14 +368,14 @@ Partial Class Form1
         '
         'EnforceMana1CoordY
         '
-        Me.EnforceMana1CoordY.Location = New System.Drawing.Point(44, 313)
+        Me.EnforceMana1CoordY.Location = New System.Drawing.Point(43, 328)
         Me.EnforceMana1CoordY.Name = "EnforceMana1CoordY"
         Me.EnforceMana1CoordY.Size = New System.Drawing.Size(100, 20)
         Me.EnforceMana1CoordY.TabIndex = 33
         '
         'EnforceMana1CoordX
         '
-        Me.EnforceMana1CoordX.Location = New System.Drawing.Point(44, 287)
+        Me.EnforceMana1CoordX.Location = New System.Drawing.Point(43, 302)
         Me.EnforceMana1CoordX.Name = "EnforceMana1CoordX"
         Me.EnforceMana1CoordX.Size = New System.Drawing.Size(100, 20)
         Me.EnforceMana1CoordX.TabIndex = 32
@@ -378,7 +383,7 @@ Partial Class Form1
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(323, 319)
+        Me.Label15.Location = New System.Drawing.Point(322, 334)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(14, 13)
         Me.Label15.TabIndex = 41
@@ -387,7 +392,7 @@ Partial Class Form1
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(323, 293)
+        Me.Label16.Location = New System.Drawing.Point(322, 308)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(14, 13)
         Me.Label16.TabIndex = 40
@@ -396,7 +401,7 @@ Partial Class Form1
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(337, 273)
+        Me.Label17.Location = New System.Drawing.Point(336, 288)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(176, 13)
         Me.Label17.TabIndex = 39
@@ -404,23 +409,53 @@ Partial Class Form1
         '
         'EnforceMana2CoordY
         '
-        Me.EnforceMana2CoordY.Location = New System.Drawing.Point(343, 316)
+        Me.EnforceMana2CoordY.Location = New System.Drawing.Point(342, 331)
         Me.EnforceMana2CoordY.Name = "EnforceMana2CoordY"
         Me.EnforceMana2CoordY.Size = New System.Drawing.Size(100, 20)
         Me.EnforceMana2CoordY.TabIndex = 38
         '
         'EnforceMana2CoordX
         '
-        Me.EnforceMana2CoordX.Location = New System.Drawing.Point(343, 290)
+        Me.EnforceMana2CoordX.Location = New System.Drawing.Point(342, 305)
         Me.EnforceMana2CoordX.Name = "EnforceMana2CoordX"
         Me.EnforceMana2CoordX.Size = New System.Drawing.Size(100, 20)
         Me.EnforceMana2CoordX.TabIndex = 37
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(723, 25)
+        Me.ToolStrip1.TabIndex = 42
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(72, 22)
+        Me.ToolStripButton1.Text = "Acerca de..."
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(596, 350)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(115, 13)
+        Me.Label18.TabIndex = 43
+        Me.Label18.Text = "gatsuxolotl@gmail.com"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(723, 384)
+        Me.BackgroundImage = Global.RuneMaker.My.Resources.Resources.MaiayTachiCloseupBackground50
+        Me.ClientSize = New System.Drawing.Size(723, 372)
+        Me.Controls.Add(Me.Label18)
+        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label17)
@@ -464,6 +499,8 @@ Partial Class Form1
         Me.Controls.Add(Me.Button1)
         Me.Name = "Form1"
         Me.Text = "RuneMaker"
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -512,4 +549,7 @@ Partial Class Form1
     Friend WithEvents Label17 As Label
     Friend WithEvents EnforceMana2CoordY As TextBox
     Friend WithEvents EnforceMana2CoordX As TextBox
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents Label18 As Label
 End Class

@@ -119,5 +119,14 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaiayTachi.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaiayTachiCloseupBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaiayTachiCloseupBackground50.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

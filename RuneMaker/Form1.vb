@@ -340,6 +340,10 @@ Public Class Form1
         MasterClick(EnforceMana2CoordX.Text, EnforceMana2CoordY.Text, 1000, "mana2")
         'Console.WriteLine("mana2")
     End Sub
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        MessageBox.Show("Recuerda mandar tus donaciones" & vbNewLine & "a Coatlixule, Server Gladera," & vbNewLine & "Gracias!!!")
+    End Sub
 End Class
 
 Public Class ManaEnforce1
