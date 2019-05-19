@@ -342,7 +342,7 @@ Public Class Form1
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
-        MessageBox.Show("Recuerda mandar tus donaciones" & vbNewLine & "a Coatlixule, Server Gladera," & vbNewLine & "Gracias!!!")
+        MessageBox.Show("Recuerda mandar tus donaciones" & vbNewLine & "a Coatlixue, Server Gladera," & vbNewLine & "Gracias!!!")
     End Sub
 End Class
 
